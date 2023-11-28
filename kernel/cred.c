@@ -229,9 +229,9 @@ void __put_cred(struct cred *cred)
 		put_ro_cred(cred);
 	} else
 #endif /*CONFIG_RKP_KDP*/
-	if (cred->non_rcu)
+	if (cred->non_rcu) {
 		put_cred_rcu(&cred->rcu);
-	else
+	} else
 		call_rcu(&cred->rcu, put_cred_rcu);
 }
 EXPORT_SYMBOL(__put_cred);
